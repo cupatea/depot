@@ -34,15 +34,15 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update cart" do
-    patch cart_url(@cart), params: { cart: {  } }
+    patch cart_url(@cart), params: { cart: { } }
     assert_redirected_to cart_url(@cart)
   end
 
   test "should destroy cart" do
     assert_difference('Cart.count', -1) do
+      p session[:cart_id] = @cart.id
       delete cart_url(@cart)
     end
-
-    assert_redirected_to carts_url
+    assert_redirected_to store_path
   end
 end

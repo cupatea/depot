@@ -29,11 +29,10 @@ class LineItemsController < ApplicationController
   def create
     add_to_card
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(product: product)
+    @line_item = @cart.add_product(product.id)
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item.cart,
-        notice: 'Line item was successfully created.' }
+        format.html { redirect_to @line_item.cart }
         format.json { render action: 'show',
         status: :created, location: @line_item }
       else
@@ -66,6 +65,9 @@ class LineItemsController < ApplicationController
       format.html { redirect_to line_items_url, notice: 'Line item was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  def line_item_params
+    params.require(:line_item).permit(:product_id)
   end
 
   private
