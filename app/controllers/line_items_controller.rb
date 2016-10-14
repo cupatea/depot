@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
+  include LineItemsHelper
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
@@ -26,6 +27,7 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
+    add_to_card
     product = Product.find(params[:product_id])
     @line_item = @cart.line_items.build(product: product)
     respond_to do |format|
