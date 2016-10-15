@@ -1,8 +1,8 @@
 one:
   name: Dave Thomas
   address: MyText
-  pay_type: Check
   email: dave@example.org
+  pay_type: Check
 
 two:
   name: MyString

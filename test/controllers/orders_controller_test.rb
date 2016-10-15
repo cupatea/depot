@@ -16,17 +16,15 @@ class OrdersControllerTest < ActionController::TestCase
     assert_redirected_to store_path
     assert_equal flash[:notice], 'Your cart is empty'
   end
-
   test "should get new" do
     item = LineItem.new
     item.build_cart
     item.product = products(:ruby)
     item.save!
     session[:cart_id] = item.cart.id
-    get :new,params: {}
+    get :new
     assert_response :success
   end
-
   test "should create order" do
     assert_difference('Order.count') do
       post :create, params: {order: { address: @order.address,
