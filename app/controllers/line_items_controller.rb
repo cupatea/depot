@@ -27,9 +27,19 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
-    add_to_card
+puts "***********"
+    p params
+puts "******** ADD TO CARD ********"
+    p add_to_card
     product = Product.find(params[:product_id])
+puts "**** Product *****"
+    p product
+
     @line_item = @cart.add_product(product.id)
+puts "*************ERORS LINE ITEM *******************"
+      p @line_item
+puts "*************ERORS LINE ITEM *******************"
+    p @line_item.errors
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to store_url}
@@ -65,7 +75,7 @@ class LineItemsController < ApplicationController
     q > 1 ? @line_item.update_attributes(quantity: q-1): @line_item.destroy
     respond_to do |format|
       format.html { redirect_to store_url}
-      format.js { @current_item = @line_item }
+      format.js
       format.json { head :no_content }
     end
   end

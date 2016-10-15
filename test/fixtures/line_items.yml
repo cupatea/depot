@@ -1,7 +1,7 @@
 one:
-  product_id: ruby
-  cart_id: one
+  product: ruby
+  order: one
 
 two:
-  product_id: coffee
-  cart_id: one
+  product: ruby
+  cart: one
