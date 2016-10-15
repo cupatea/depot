@@ -60,14 +60,12 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @line_item.destroy
+    q=@line_item.quantity
+    q > 1 ? @line_item.update_attributes(quantity: q-1): @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to cart_url(session[:cart_id])}
       format.json { head :no_content }
     end
-  end
-  def line_item_params
-    params.require(:line_item).permit(:product_id)
   end
 
   private
