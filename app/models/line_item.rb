@@ -1,5 +1,5 @@
-class LineItem < ActiveRecord::Base
-  belongs_to :order
+ class LineItem < ActiveRecord::Base
+  belongs_to :order, optional: true
   belongs_to :product
   belongs_to :cart
   def total_price

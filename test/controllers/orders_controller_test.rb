@@ -26,6 +26,7 @@ class OrdersControllerTest < ActionController::TestCase
     assert_response :success
   end
   test "should create order" do
+
     assert_difference('Order.count') do
       post :create, params: {order: { address: @order.address,
                                       email: @order.email,
