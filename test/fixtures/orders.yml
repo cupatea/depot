@@ -1,3 +1,4 @@
+
 one:
   name: Dave Thomas
   address: MyText
@@ -8,4 +9,4 @@ two:
   name: MyString
   address: MyText
   email: MyString
-  pay_type: MyString
+  pay_type: 1

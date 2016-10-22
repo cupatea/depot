@@ -1,6 +1,6 @@
  class LineItem < ActiveRecord::Base
   belongs_to :order, optional: true
-  belongs_to :product
+  belongs_to :product, optional: true
   belongs_to :cart
   def total_price
     product.price * quantity
