@@ -6,5 +6,27 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
+  def login_as(user)
+    session[:user_id] = users(user).id
+  end
+  def logout
+    session.delete :user_id
+  end
+  def setup
+    login_as :one if defined? session
+  end
+  class ActionDispatch::IntegrationTest
+    def login_as(user)
+      post login_url, params: { name: user.name, password: 'secret' }
+    end
+
+    def logout
+      delete logout_url
+    end
+
+    def setup
+      login_as users(:one)
+    end
+  end
   # Add more helper methods to be used by all tests here...
 end
