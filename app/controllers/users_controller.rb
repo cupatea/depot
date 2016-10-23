@@ -55,18 +55,17 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    begin
-      @user.destroy
-      flash[:notice]="User #{@user.name} deleted"
-    rescue StandartError => e
-      flash[:notice]=e.massage
-    end    
+    @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url,
+        notice: '"User #{@user.name} deleted"' }
       format.json { head :no_content }
     end
   end
 
+  rescue_from 'User::Error' do |exception|
+    redirect_to users_url, notice: exception.message
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
